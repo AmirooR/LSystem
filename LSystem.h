@@ -37,16 +37,16 @@ class LSystem
 		void DrawLevel(int level);
 		void Develop();
 		void Animate();
-		bool LSystem::AddRule(const char *rulestr);
+		bool AddRule(const char *rulestr);
 		
-		void LSystem::AddFunction_SpaceTransform(const char *ident_str, const guint rotate, const guint translate, const guint scale);
-		void LSystem::AddFunction_Primitive(const char *ident_str, int prim_type, float r, float g, float b);
-		void LSystem::AddScannerSymbol(const char *ident, gpointer new_func);
+		void AddFunction_SpaceTransform(const char *ident_str, const guint rotate, const guint translate, const guint scale);
+		void AddFunction_Primitive(const char *ident_str, int prim_type, float r, float g, float b);
+		void AddScannerSymbol(const char *ident, gpointer new_func);
 		
 		static void trav_func(gpointer data, gpointer user_data);
-		void LSystem::PrintFunctionSet();
-		GList *LSystem::ParseXFix(GScanner *scanner, GList *xfix, bool &correct_xfix); // parses prefix and postfix statements
-		bool LSystem::SetResult(int level, const char *init_axiom);
+		void PrintFunctionSet();
+		GList *ParseXFix(GScanner *scanner, GList *xfix, bool &correct_xfix); // parses prefix and postfix statements
+		bool SetResult(int level, const char *init_axiom);
 	};
 
 

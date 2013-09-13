@@ -30,11 +30,11 @@ struct SubRuleData
 class Rule
 	{
 	private:
-		bool Rule::MatchXfix(GArray *commands, int index, GList *xfix, int dir);
-		bool Rule::MatchPrefix(GArray *commands, guint match_index, GList *prefix);
-		bool Rule::MatchPostfix(GArray *commands, guint match_index, GList *postfix);
-		GList *Rule::ParseXFix(GScanner *scanner, GList *xfix, bool &correct_xfix);
-		void Rule::PrintXfix(GList *xfix, GString *output); // Print either rule match postfix or prefix to the output.
+		bool MatchXfix(GArray *commands, int index, GList *xfix, int dir);
+		bool MatchPrefix(GArray *commands, guint match_index, GList *prefix);
+		bool MatchPostfix(GArray *commands, guint match_index, GList *postfix);
+		GList *ParseXFix(GScanner *scanner, GList *xfix, bool &correct_xfix);
+		void PrintXfix(GList *xfix, GString *output); // Print either rule match postfix or prefix to the output.
 		
 	public:
 		Function *bound_func; //the name of the bound function (the function with the ident name)
@@ -49,19 +49,19 @@ class Rule
 		int correct_condition;
 		bool correct_pattern;  
 		
-		Rule::Rule();
+		Rule();
 		~Rule();
-		int Rule::Match(struct CommandData *cur_command, GArray *commands, int match_index, double param_value); ///< Check if this rule matches
+		int Match(struct CommandData *cur_command, GArray *commands, int match_index, double param_value); ///< Check if this rule matches
 		
 		/// Generate the rule output.
-		void Rule::Generate(struct CommandData *cur_command, GArray *output_commands, double param_value, int *correct_generation);
+		void Generate(struct CommandData *cur_command, GArray *output_commands, double param_value, int *correct_generation);
 		
-		void Rule::Print(GString *output); // Prints the content of this rule to the output. 
-		void Rule::SetCondition(GArray *_infix_cond); // Set the rule parameter value condition.
-		void Rule::AddSubRule(float _prob, GArray *_commands); // Add a sub rule with its probability.
-		void Rule::PrintCommands(GArray *commands, GString *output); // Print the commands of one command sequence to the output.
+		void Print(GString *output); // Prints the content of this rule to the output. 
+		void SetCondition(GArray *_infix_cond); // Set the rule parameter value condition.
+		void AddSubRule(float _prob, GArray *_commands); // Add a sub rule with its probability.
+		void PrintCommands(GArray *commands, GString *output); // Print the commands of one command sequence to the output.
 		
-		bool Rule::SetRule(GScanner *scanner, GList *funcset); // Set the rule content.
+		bool SetRule(GScanner *scanner, GList *funcset); // Set the rule content.
 	};
 
 /**
