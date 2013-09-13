@@ -203,6 +203,24 @@ void lsys_log_handler(const gchar *log_domain,
 	printf("lsys:%s", message);
 }
 
+
+void grammar1()
+{
+	lsys.AddFunction_SpaceTransform("rz", 0x4, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_SpaceTransform("ry", 0x2, 0x0, 0x0); // create a rotation function around y
+	//lsys.AddFunction_SpaceTransform("G", 0x0, 0x2, 0x0); // create a translation function along x 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
+	lsys.AddFunction_Primitive("G", PRIMITIVE_CYLINDER, 0.160, 0.047, 0.02); // create a line function
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(1)");
+	//lsys.AddRule("F(t),*,*,[]:<0.5> G(t) [ rz(25) F(t) ] [ rz(-25) F(t) ] G(t) F(t) <> G(t) [ rz(5) F(t) ] [ rz(-5) F(t) ] G(t) F(t)");
+	lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(-60) rz(25) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] ");
+	/*lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(120) rz(25) F(t*0.75) ] [ ry(180) rz(25) F(t*0.75) ] ");*/
+	
+	lsys.AddRule("G(t),*,*,[]:<> G(t*1.1)");
+	
+
+}
 //Initializes stuff
 void init() 
 {
@@ -248,20 +266,8 @@ void init()
 	g_log_set_handler ("lsys", 
 					   (GLogLevelFlags)(G_LOG_LEVEL_INFO | G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_MESSAGE), 
 					   lsys_log_handler, NULL);
-	
-	lsys.AddFunction_SpaceTransform("rz", 0x4, 0x0, 0x0); // create a rotation function around z 
-	lsys.AddFunction_SpaceTransform("ry", 0x2, 0x0, 0x0); // create a rotation function around y
-	//lsys.AddFunction_SpaceTransform("G", 0x0, 0x2, 0x0); // create a translation function along x 
-	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
-	lsys.AddFunction_Primitive("G", PRIMITIVE_CYLINDER, 0.160, 0.047, 0.02); // create a line function
-	lsys.PrintFunctionSet();
-	lsys.SetResult(0, "F(1)");
-	//lsys.AddRule("F(t),*,*,[]:<0.5> G(t) [ rz(25) F(t) ] [ rz(-25) F(t) ] G(t) F(t) <> G(t) [ rz(5) F(t) ] [ rz(-5) F(t) ] G(t) F(t)");
-	lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(-60) rz(25) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] ");
-	/*lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(120) rz(25) F(t*0.75) ] [ ry(180) rz(25) F(t*0.75) ] ");*/
-	
-	lsys.AddRule("G(t),*,*,[]:<> G(t*1.1)");
-	
+
+	grammar1();
 }	
 
 int main(int argc, char **argv) 
