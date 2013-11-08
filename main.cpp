@@ -202,25 +202,225 @@ void lsys_log_handler(const gchar *log_domain,
 {
 	printf("lsys:%s", message);
 }
+/**
+  * Tree5
+  *
+  **/
+void grammar12()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_CYLINDER, 0.160, 0.048, 0.01); // create a line function
+	lsys.AddFunction_Primitive("X", PRIMITIVE_CYLINDER, 0.160, 0.048, 0.01);
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(2)");
+	lsys.AddRule("F(t),*,*,[]: <0.5> X(t)  [rx(50)  F(t*0.75)] [rx(-10) F(t*0.75)] <> X(t) [rx(-50) F(t*0.75)] [rx(10) F(t*0.75)]");
+	lsys.AddRule("X(t),*,*,[]: <> X(t)");
+	
+}
 
 
-void grammar1()
+/**
+  * Tree4
+  *
+  **/
+void grammar11()
 {
 	lsys.AddFunction_SpaceTransform("rz", 0x4, 0x0, 0x0); // create a rotation function around z 
 	lsys.AddFunction_SpaceTransform("ry", 0x2, 0x0, 0x0); // create a rotation function around y
-	//lsys.AddFunction_SpaceTransform("G", 0x0, 0x2, 0x0); // create a translation function along x 
 	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
 	lsys.AddFunction_Primitive("G", PRIMITIVE_CYLINDER, 0.160, 0.047, 0.02); // create a line function
 	lsys.PrintFunctionSet();
 	lsys.SetResult(0, "F(1)");
-	//lsys.AddRule("F(t),*,*,[]:<0.5> G(t) [ rz(25) F(t) ] [ rz(-25) F(t) ] G(t) F(t) <> G(t) [ rz(5) F(t) ] [ rz(-5) F(t) ] G(t) F(t)");
-	lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(-60) rz(25) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] ");
-	/*lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(120) rz(25) F(t*0.75) ] [ ry(180) rz(25) F(t*0.75) ] ");*/
+	lsys.AddRule("F(t),*,*,[]:<0.8> G(t) [ ry(40) rz(45) F(t*0.75) ] [ ry(100) rz(15) F(t*0.75) ] [ ry(180) rz(25) F(t*0.75) ][ry(-90) rz(45)  F(t*0.5)] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(120) rz(25) F(t*0.75) ] [ ry(-60) rz(25) F(t*0.75) ] [ry(-120) rz(25) F(t*0.3)]");
 	
 	lsys.AddRule("G(t),*,*,[]:<> G(t*1.1)");
-	
 
 }
+
+/**
+  * Tree3
+  *
+  **/
+void grammar10()
+{
+	lsys.AddFunction_SpaceTransform("rz", 0x4, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_SpaceTransform("ry", 0x2, 0x0, 0x0); // create a rotation function around y
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
+	lsys.AddFunction_Primitive("G", PRIMITIVE_CYLINDER, 0.160, 0.047, 0.02); // create a line function
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(1)");
+	lsys.AddRule("F(t),*,*,[]:<0.4> G(t) [ ry(40) rz(45) F(t*0.75) ] [ ry(100) rz(15) F(t*0.75) ] [ ry(180) rz(25) F(t*0.75) ][ry(-90) rz(45)  F(t*0.5)] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(120) rz(25) F(t*0.75) ] [ ry(-60) rz(25) F(t*0.75) ] [ry(-120) rz(25) F(t*0.3)]");
+	
+	lsys.AddRule("G(t),*,*,[]:<> G(t*1.1)");
+
+}
+
+/**
+  * Tree2
+  *
+  **/
+void grammar9()
+{
+	lsys.AddFunction_SpaceTransform("rz", 0x4, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_SpaceTransform("ry", 0x2, 0x0, 0x0); // create a rotation function around y
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
+	lsys.AddFunction_Primitive("G", PRIMITIVE_CYLINDER, 0.160, 0.047, 0.02); // create a line function
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(1)");
+	lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(120) rz(25) F(t*0.75) ] [ ry(180) rz(25) F(t*0.75) ] ");
+	
+	lsys.AddRule("G(t),*,*,[]:<> G(t*1.1)");
+
+}
+
+/**
+  * Sample_lsys
+  *
+  **/
+void grammar8()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.8, 0.1); // create a line function
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(3) rx(-90) F(3) rx(-90) F(3) rx(-90) F(3)");
+	
+	lsys.AddRule("F(t),*,*,[]:<> F(t/4) rx(-90) F(t/4) rx(90) F(t/4) rx(90) F(t/4)F(t/4) rx(-90) F(t/4) rx(-90) F(t/4) rx(90) F(t/4)");
+
+}
+
+
+/**
+  * Parametric
+  *
+  **/
+void grammar7()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around x 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.160, 0.048, 0.01); // create a line function
+	lsys.AddFunction_Primitive("X", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+	lsys.AddFunction_Primitive("G", PRIMITIVE_LINE, 0.160, 0.047, 0.02); // create a line function
+	lsys.AddFunction_Primitive("H", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+	lsys.AddFunction_Primitive("K", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(0)");
+	
+	lsys.AddRule("F(t),*,*,[t>0]:<> F(t-.1)"); 
+	lsys.AddRule("F(t),*,*,[t<=0]:<> X(.1) [rx(45) F(.6)] X(.1) rx(3) K(0)");
+	lsys.AddRule("X(t),*,*,[]:<> X(t*1.15)");
+	lsys.AddRule("K(t),*,*,[t<=0]:<> X(.1) [rx(-45) K(.6)] X(.1) rx(3) F(0)");
+	lsys.AddRule("K(t),*,*,[t>0]:<> K(t-.1) ");
+
+}
+
+/**
+  * main
+  *
+  **/
+void grammar6()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around x 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.160, 0.048, 0.01); // create a line function
+	lsys.AddFunction_Primitive("X", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+	lsys.AddFunction_Primitive("G", PRIMITIVE_LINE, 0.160, 0.047, 0.02); // create a line function
+	lsys.AddFunction_Primitive("H", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+	lsys.AddFunction_Primitive("K", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(2)");
+	
+	lsys.AddRule("F(t),*,*,[t>1]:<> G(t)[rx(45) F(t*0.75)] K(t)");
+	lsys.AddRule("K(t),*,*,[t<=1]:<> G(t)[rx(-45) F(t*0.75)]");
+	lsys.AddRule("G(t),*,*,[]: <> G(t*1.1)");
+}
+
+/**
+  * Sample2
+  *
+  **/
+void grammar5()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.160, 0.848, 0.01); // create a line function
+	lsys.AddFunction_Primitive("X", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+	lsys.AddFunction_Primitive("G", PRIMITIVE_LINE, 0.160, 0.047, 0.02); // create a line function
+	lsys.AddFunction_Primitive("H", PRIMITIVE_NOTHING, 0.860, 0.048, 0.01);
+	lsys.AddFunction_Primitive("K", PRIMITIVE_NOTHING, 0.160, 0.048, 0.01);
+
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "X(1)");
+	
+	lsys.AddRule("X(t),*,*,[]:<>G(1) [rx(85) X(t)] [rx(-85) X(t)]");
+	lsys.AddRule("G(t),*,*,[]:<>G(t*1.456)");
+}
+
+
+/**
+  * Koch Curve
+  *
+  **/
+void grammar4()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "rx(60) F(3) rx(-120) F(3) rx(-120) F(3)");
+	lsys.AddRule("F(t),*,*,[]:<> F(t/3) rx(-60) F(t/3) rx(120) F(t/3) rx(-60) F(t/3)");
+}
+
+/**
+  * Context-Sensitive 
+  *
+  **/
+
+void grammar3()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around x 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.160, 0.848, 0.01); // create a line function
+	lsys.AddFunction_Primitive("X", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+	lsys.AddFunction_Primitive("G", PRIMITIVE_LINE, 0.160, 0.047, 0.02); // create a line function
+	lsys.AddFunction_Primitive("H", PRIMITIVE_LINE, 0.860, 0.048, 0.01);
+	lsys.AddFunction_Primitive("K", PRIMITIVE_LINE, 0.160, 0.048, 0.01);
+
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "H(.2)F(0.2)F(0.2)F(0.2)");
+	
+	lsys.AddRule("F(t),H,*,[]:<>H(t)");
+	lsys.AddRule("H(t),*,*,[]:<>F(t)");
+}
+
+
+/**
+  * Bush
+  *
+  **/
+void grammar2()
+{
+	lsys.AddFunction_SpaceTransform("rx", 0x1, 0x0, 0x0); // create a rotation function around x 
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.8, 0.1); // create a line function
+	lsys.AddFunction_Primitive("X", PRIMITIVE_LINE, 0.8, 0.1, 0.1);
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "X(1)");
+	lsys.AddRule("X(t),*,*,[]:<> F(t*0.5) rx(-22.5) [[X(t*0.5)] rx(22.5)] rx(22.5) F(t*0.5) [rx(22.5) F(t*0.5) X(t*0.5)] rx(-22.5) X(t*0.5)");
+	lsys.AddRule("F(t),*,*,[]:<> F(t*0.5) F(t*0.5)");
+}
+
+/**
+  * Simple Symmetric Tree
+  *
+  **/
+void grammar1()
+{
+	lsys.AddFunction_SpaceTransform("rz", 0x4, 0x0, 0x0); // create a rotation function around z 
+	lsys.AddFunction_SpaceTransform("ry", 0x2, 0x0, 0x0); // create a rotation function around y
+	lsys.AddFunction_Primitive("F", PRIMITIVE_LINE, 0.1, 0.5, 0.1); // create a line function
+	lsys.AddFunction_Primitive("G", PRIMITIVE_CYLINDER, 0.160, 0.047, 0.02); // create a line function
+	lsys.PrintFunctionSet();
+	lsys.SetResult(0, "F(1)");
+	lsys.AddRule("F(t),*,*,[]:<0.1> G(t) [ ry(60) rz(45) F(t*0.75) ] [ ry(-60) rz(15) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] <> G(t) [ ry(60) rz(25) F(t*0.75) ] [ ry(-60) rz(25) F(t*0.75) ] [ ry(-180) rz(25) F(t*0.75) ] ");
+	lsys.AddRule("G(t),*,*,[]:<> G(t*1.1)");
+}
+
 //Initializes stuff
 void init() 
 {
@@ -267,7 +467,7 @@ void init()
 					   (GLogLevelFlags)(G_LOG_LEVEL_INFO | G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_MESSAGE), 
 					   lsys_log_handler, NULL);
 
-	grammar1();
+	grammar8();
 }	
 
 int main(int argc, char **argv) 
